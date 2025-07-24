@@ -1,4 +1,6 @@
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -8,7 +10,12 @@ export const GET = async (
 ) => {
 
     try{
-        const USERId = "123"; // Replace with actual user ID retrieval logic
+        const session = await getServerSession(authOptions);
+
+        if (!session || !session.user) {
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { id: projectId } = await params;
 
         if (!projectId) {

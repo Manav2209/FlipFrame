@@ -1,4 +1,6 @@
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -7,8 +9,12 @@ export const GET = async(
   { params }: { params: Promise<{ id: string }> }
 ) => {
     try {
+        const session = await getServerSession(authOptions);
 
-        const USERId = "123"; // Replace with actual user ID retrieval logic
+        if (!session || !session.user) {
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
         const { id : projectId} = await params;
 
         if (!projectId) {
@@ -21,7 +27,7 @@ export const GET = async(
         const project = await prisma.project.findUnique({
             where: {
                 id: projectId,
-                userId: USERId, // Ensure the project belongs to the user
+                userId: session.user.id // Ensure the project belongs to the user
             },
         });
         if(!project) {

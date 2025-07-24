@@ -1,11 +1,17 @@
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
 // { name :"prompt" , description :"prompt ,userId "}
 export const POST = async (req: NextRequest) => {
 
     try{
-    const USERId ="123"
+        const session = await getServerSession(authOptions);
+
+        if (!session || !session.user) {
+          return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
 
     const body = await req.json();
 
@@ -20,7 +26,7 @@ export const POST = async (req: NextRequest) => {
     const existingProject = await prisma.project.findFirst({
         where: {
             name: prompt,
-            userId: USERId,
+            userId: session.user.id
         },
     });
     if (existingProject) {
@@ -34,7 +40,7 @@ export const POST = async (req: NextRequest) => {
         data: {
             name: prompt,
             description: prompt,
-            userId: USERId,
+            userId: session.user.id,
             createdAt: new Date(),
             updatedAt: new Date()
         },
@@ -64,11 +70,14 @@ export const POST = async (req: NextRequest) => {
 export const GET = async () => {
     try {
         
-        const USERId ="123"
+        const session = await getServerSession(authOptions);
+        if (!session || !session.user) {
+            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+        }
         
         const projects = await prisma.project.findMany({
             where: {
-            userId: USERId,
+            userId: session.user.id, // Ensure you have the user ID from the session
             },
             orderBy: {
             createdAt: "desc",
