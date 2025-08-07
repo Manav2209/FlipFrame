@@ -18,9 +18,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account }) {
       if (user) {
         token.userId = user.id;
-        if (user.image) {
-          token.picture = user.image;
-        }
+      
       }
 
       if (account) {
@@ -34,9 +32,6 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.userId as string;
       }
 
-      if (token.picture) {
-        session.user.image = token.picture as string;
-      }
 
       return session;
     },
@@ -62,7 +57,7 @@ declare module "next-auth" {
       id: string;
       email?: string | null;
       name?: string | null;
-      image?: string | null;
+      
     };
   }
 }
@@ -71,6 +66,6 @@ declare module "next-auth/jwt" {
   interface JWT {
     userId?: string;
     accessToken?: string;
-    picture?: string;
+    
   }
 }

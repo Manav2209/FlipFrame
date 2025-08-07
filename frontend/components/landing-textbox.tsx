@@ -66,7 +66,7 @@ export const LandingTextBox = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     if(!session){
-      toast.error("Please Login to use Looma");
+      toast.error("Please Login to use FlipFrame");
       return;
     }
     e.preventDefault();

@@ -19,7 +19,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -116,7 +116,12 @@ async def run_manim(data: ManimCode):
                 s3_key,
                 ExtraArgs={"ContentType": "video/mp4"}
             )
-            s3_url = f"https://{bucket_name}.s3.amazonaws.com/{s3_key}"
+            s3_url = s3_client.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': bucket_name, 'Key': s3_key},
+                ExpiresIn=86400  # 24 hours in seconds
+            )
+    
             os.remove(video_path)
             
         except ClientError as e:

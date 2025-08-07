@@ -21,16 +21,16 @@ export default function SignupForm() {
       {/* Logo/Brand Mark */}
       <div className="flex justify-center mb-6">
         <div className="rounded-xl flex items-center justify-center shadow-md">
-          <Image src="/logo (1).png" alt="logo" width={30} height={30} />
+          <Image src="/logo(1).png" alt="logo" width={30} height={30} />
         </div>
       </div>
 
       <h2 className="font-bold text-2xl text-white text-center">
-        Welcome to Looma
+        Welcome to FlipFrame
       </h2>
 
       <p className="text-gray-400 text-sm max-w-sm mt-2 text-center mx-auto">
-        Get started with Looma
+        Get started with FlipFrame
       </p>
 
       <div className="mt-8">

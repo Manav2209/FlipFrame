@@ -23,10 +23,10 @@ export const LandingHeader = () => {
       <Link href={"/"}>
         <div className="flex items-center gap-2 flex-row">
           <div className="h-10 w-10 rounded-full  flex items-center justify-center">
-           <Image src="/logo (1).png" alt="logo" width={30} height={30} /> 
+            <Image src="/logo(1).png" alt="logo" width={30} height={30} />
           </div>
 
-          <h1 className="text-2xl font-bold text-white ">Looma</h1>
+          <h1 className="text-2xl font-bold text-white ">FlipFrame</h1>
         </div>
       </Link>
       <div className="flex gap-4 ">

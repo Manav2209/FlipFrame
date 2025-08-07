@@ -156,7 +156,7 @@ export default function Landing() {
             className="text-md md:text-md text-gray-400 max-w-3xl mb-12"
           >
             Prompt, design, animate, and share stunning animations powered by AI
-            technology. Looma makes animation creation accessible to everyone.
+            technology. FlipFrame makes animation creation accessible to everyone.
           </motion.p>
 
           <motion.div
@@ -191,12 +191,12 @@ export default function Landing() {
           </motion.div>
 
           <div className="flex flex-row justify-center items-center gap-3">
-            <Link href="https://github.com/Saksham1387/Looma">
+            <Link href="">
             <div className="flex flex-row items-center gap-2 bg-neutral-900 rounded-lg p-2 cursor-pointer">
               <Github className="text-gray-400" size={20} />
             </div>
             </Link>
-            <Link href="https://x.com/Saksham37718116">
+            <Link href="">
             <div className="flex flex-row items-center gap-2 bg-neutral-900 rounded-lg p-2 cursor-pointer">
               <Twitter className="text-gray-400" size={20} />
             </div>
