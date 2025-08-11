@@ -137,6 +137,9 @@ const Chatpage = ({ id }: Props) => {
       const manimCode = promptResponse.data.code;
       const videoUrl = promptResponse.data.url;
       
+      if (!manimCode) {
+        throw new Error("No Manim code returned from /api/prompt");
+      }
       setVideoUrl(videoUrl);
   
       // Add the system response with the video URL

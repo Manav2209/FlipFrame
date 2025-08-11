@@ -49,10 +49,13 @@ export const POST = async ( req : NextRequest) => {
         console.log("Extracted Code:");
         console.log(extractCode);
 
+        const sceneNameMatch = extractCode!.match(/class\s+(\w+)\s*\(\s*Scene\s*\):/);
+    const sceneName = sceneNameMatch ? sceneNameMatch[1] : null;
         // trying to get resposne from worker part
-        const responsefromWorker = await axios.post(process.env.WORKER_URL! ,{
-            extractCode
-        })
+        const responsefromWorker =await axios.post(`${process.env.WORKER_URL}/run-manim`, {
+            code: extractCode,
+            scene_name: sceneName // or the actual scene name
+        });
 
         const url = responsefromWorker.data.videoUrl;
         await prisma.prompt.update({
